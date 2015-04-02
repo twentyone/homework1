@@ -11,6 +11,7 @@ public class EventTree<Key extends Comparable<Key>, Value> {
     private Node root;
 
     /**
+     * awf
      * Inner class defining a node in the tree.
      */
     private class Node {
