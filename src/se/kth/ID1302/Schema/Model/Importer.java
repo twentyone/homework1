@@ -24,11 +24,11 @@ public class Importer {
 			builder = new CalendarBuilder();
 			calendar = builder.build(fin);
 		} catch (ParserException e) {
-			
+			System.err.println("Parse Exception");
 		} catch (FileNotFoundException e) {
 			System.err.println("Cannot read the file");
 		} catch (IOException e) {
-			
+			System.err.println("I/O Exception");
 		}
 		
 		
