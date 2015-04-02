@@ -22,19 +22,14 @@ public class Importer {
 		FileInputStream fin;
 		CalendarBuilder builder;
 		Calendar calendar = null;
-		
-		FileInputStream fin1;
-		CalendarBuilder builder1;
-		Calendar calendar1 = null;
+		//asd
 		
 		try {
 			fin = new FileInputStream("personal.ics");
 			builder = new CalendarBuilder();
 			calendar = builder.build(fin);
 			
-			fin1 = new FileInputStream("personal1.ics");
-			builder1 = new CalendarBuilder();
-			calendar1 = builder.build(fin1);
+		
 		} catch (ParserException e) {
 			System.err.println("Parse Exception");
 		} catch (FileNotFoundException e) {
@@ -43,13 +38,12 @@ public class Importer {
 			System.err.println("I/O Exception");
 		}
 		
-		for (Object c : calendar1.getComponents()) {
+		for (Object c : calendar.getComponents()) {
 		    Component component = (Component) c;
 		    System.out.println(component.getName());
 		    String dateTime = component.getProperties().getProperty(Property.DTSTART).getValue();
-		    System.out.println();
+		    System.out.println(dateTime);
 		    Date d = new Date(DateTime.parse(dateTime));
-		    
 		    
 		    
 //		    for (Object p : component.getProperties()) {
