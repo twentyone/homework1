@@ -4,11 +4,13 @@ import java.util.Date;
 
 public class Event {
 	private String id;
+	private String owner;
 	private Date start;
 	private Date end;
 	
-	public Event(Date start, Date end, String id) {
+	public Event(Date start, Date end, String id, String owner) {
 		this.id = id;
+		this.owner = owner;
 		this.start = start;
 		this.end = end;
 	}
@@ -25,7 +27,11 @@ public class Event {
 		return end;
 	}
 	
+	public String getOwner() {
+		return owner;
+	}
+
 	public String toString() {
-		return "UID: " + id + "\nStart: " + start + "\nEnd: " + end;
+		return "Owner: " + owner + "\nUID: " + id + "\nStart: " + start + "\nEnd: " + end;
 	}
 }

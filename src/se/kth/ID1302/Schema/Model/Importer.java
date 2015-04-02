@@ -18,25 +18,14 @@ import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.parameter.Value;
 
 public class Importer {
-
-	public static void main(String[] args) {
-		try {
-			EventTree<String, Event> tree = new EventTree<String, Event>();
-			new Importer().importCalendar(tree);
-				System.out.println(tree.get("115012"));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	
-	public void importCalendar(EventTree<String, Event> eventTree) throws ParseException {
+	public static void importCalendar(EventTree<Date, Event> eventTree, String owner) throws ParseException {
 		FileInputStream fin;
 		CalendarBuilder builder;
 		Calendar calendar = null;
-		//asd
 		
 		try {
+			//TODO: get file
 			fin = new FileInputStream("personal.ics");
 			builder = new CalendarBuilder();
 			calendar = builder.build(fin);
@@ -61,13 +50,12 @@ public class Importer {
 		  	Date startDate  = test.parse(start);
 		    Date endDate    = test.parse(end);
 		    
-		    Event event = new Event(startDate, endDate, uid);
+		    Date key = new Date(startDate.getYear(), startDate.getMonth(), startDate.getDate());
 		    
-		    String key = Integer.toString(startDate.getYear()) + 
-		    			 Integer.toString(startDate.getMonth()) + 
-    					 Integer.toString(startDate.getDate());
-
+		    Event event = new Event(startDate, endDate, uid, owner);
+		    
 		    eventTree.put(key, event);
+		    
 		}
 		
 	}
