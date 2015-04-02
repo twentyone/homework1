@@ -22,6 +22,7 @@ public class Importer {
 		FileInputStream fin;
 		CalendarBuilder builder;
 		Calendar calendar = null;
+		//asd
 		
 		try {
 			fin = new FileInputStream("personal.ics");
