@@ -5,7 +5,7 @@ public class Controller {
 		
 	}
 	
-	public  importSchema() {
+	public void importSchema() {
 		
 	}
 }
