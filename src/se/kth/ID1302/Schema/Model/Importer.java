@@ -4,13 +4,16 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
+import java.util.Date;
 import java.util.Iterator;
 
 import net.fortuna.ical4j.data.CalendarBuilder;
 import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.Component;
+import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.Property;
+import net.fortuna.ical4j.model.parameter.Value;
 
 public class Importer {
 
@@ -19,10 +22,19 @@ public class Importer {
 		FileInputStream fin;
 		CalendarBuilder builder;
 		Calendar calendar = null;
+		
+		FileInputStream fin1;
+		CalendarBuilder builder1;
+		Calendar calendar1 = null;
+		
 		try {
 			fin = new FileInputStream("personal.ics");
 			builder = new CalendarBuilder();
 			calendar = builder.build(fin);
+			
+			fin1 = new FileInputStream("personal1.ics");
+			builder1 = new CalendarBuilder();
+			calendar1 = builder.build(fin1);
 		} catch (ParserException e) {
 			System.err.println("Parse Exception");
 		} catch (FileNotFoundException e) {
@@ -31,16 +43,33 @@ public class Importer {
 			System.err.println("I/O Exception");
 		}
 		
-		
-		for (Iterator i = calendar.getComponents().iterator(); i.hasNext();) {
-		    Component component = (Component) i.next();
-		    System.out.println("Component [" + component.getName() + "]");
-
-		    for (Iterator j = component.getProperties().iterator(); j.hasNext();) {
-		        Property property = (Property) j.next();
-		        System.out.println("Property [" + property.getName() + ", " + property.getValue() + "]");
-		    }
+		for (Object c : calendar1.getComponents()) {
+		    Component component = (Component) c;
+		    System.out.println(component.getName());
+		    String dateTime = component.getProperties().getProperty(Property.DTSTART).getValue();
+		    System.out.println();
+		    Date d = new Date(DateTime.parse(dateTime));
+		    
+		    
+		    
+//		    for (Object p : component.getProperties()) {
+//		        Property property = (Property) p;
+//		    	if (property.equals(Property.)) {
+//		    		
+//		    	}
+//		    		// lägg in i ds (property.getValue()) 
+//		    }
 		}
+//		
+//		for (Iterator i = calendar1.getComponents().iterator(); i.hasNext();) {
+//		    Component component = (Component) i.next();
+//		    System.out.println("Component [" + component.getName() + "]");
+//
+//		    for (Iterator j = component.getProperties().iterator(); j.hasNext();) {
+//		        Property property = (Property) j.next();
+//		        System.out.println("Property [" + property.getName() + ", " + property.getValue() + "]");
+//		    }
+//		}
 		
 		
 	}
