@@ -3,17 +3,14 @@ package se.kth.ID1302.Schema.Model;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URI;
-import java.util.Date;
-import java.util.Iterator;
 
+import edu.princeton.cs.introcs.StdOut;
 import net.fortuna.ical4j.data.CalendarBuilder;
 import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.Component;
 import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.Property;
-import net.fortuna.ical4j.model.parameter.Value;
 
 public class Importer {
 
@@ -43,7 +40,7 @@ public class Importer {
 		    System.out.println(component.getName());
 		    String dateTime = component.getProperties().getProperty(Property.DTSTART).getValue();
 		    System.out.println(dateTime);
-		    Date d = new Date(DateTime.parse(dateTime));
+		    System.out.println(DateTime.parse(dateTime));
 		    
 		    
 //		    for (Object p : component.getProperties()) {
