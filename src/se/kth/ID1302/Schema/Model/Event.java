@@ -24,4 +24,8 @@ public class Event {
 	public Date getEnd() {
 		return end;
 	}
+	
+	public String toString() {
+		return "UID: " + id + "\nStart: " + start + "\nEnd: " + end;
+	}
 }
