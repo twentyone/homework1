@@ -17,9 +17,7 @@ public class TempView {
 			controller.importSchema(tree, "Daniel");
 			controller.importSchema(tree, "Konstantin");
 			controller.importSchema(tree, "Max");
-			for(Date d : tree.keys(new Date(2015 - 1900, 1 - 1, 8), new Date(2015 - 1900, 1 - 1, 10)))
-				System.out.println(tree.get(d));
-			
+			controller.runAlgorithm(tree, new Date(2015 - 1900, 1 - 1, 8), new Date(2015 - 1900, 1 - 1, 10));
 			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
