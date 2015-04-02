@@ -64,7 +64,7 @@ public class Importer {
 		    Event event = new Event(startDate, endDate, uid);
 		    
 		    String key = Integer.toString(startDate.getYear()) + 
-		    			 Integer.toString(startDate.getMonth())a + 
+		    			 Integer.toString(startDate.getMonth()) + 
     					 Integer.toString(startDate.getDate());
 
 		    eventTree.put(key, event);
