@@ -17,7 +17,10 @@ public class TempView {
 			controller.importSchema(tree, "Daniel");
 			controller.importSchema(tree, "Konstantin");
 			controller.importSchema(tree, "Max");
-			controller.runAlgorithm(tree, new Date(2015 - 1900, 1 - 1, 8), new Date(2015 - 1900, 1 - 1, 10));
+			controller.runAlgorithm(tree, new Date(2015 - 1900, 1 - 1, 8), 
+					new Date(2015 - 1900, 1 - 1, 10), 
+					new Date(2015 - 1900, 1 - 1, 10, 9, 18), 
+					new Date(2015 - 1900, 1 - 1, 10, 15, 4));
 			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block

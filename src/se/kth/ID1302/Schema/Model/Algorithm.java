@@ -9,8 +9,8 @@ public class Algorithm {
 			Date dateStart, Date dateEnd, 
 			Date timeStart, Date timeEnd) {
 	
-		double hours = (timeEnd.getHours()   + timeEnd.getMinutes()   / 60) - 
-					   (timeStart.getHours() + timeStart.getMinutes() / 60);
+		double hours = (timeEnd.getHours()   + timeEnd.getMinutes()   / 60f) - 
+					   (timeStart.getHours() + timeStart.getMinutes() / 60f);
 		
 		System.out.println(hours / 0.25);
 //		
