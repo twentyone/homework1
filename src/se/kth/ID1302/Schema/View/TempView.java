@@ -3,10 +3,11 @@ package se.kth.ID1302.Schema.View;
 import java.text.ParseException;
 import java.util.Date;
 
+
+
 import se.kth.ID1302.Schema.Controller.Controller;
 import se.kth.ID1302.Schema.Model.Event;
 import se.kth.ID1302.Schema.Model.EventTree;
-import se.kth.ID1302.Schema.Model.Importer;
 
 public class TempView {
 
@@ -14,14 +15,14 @@ public class TempView {
 		try {
 			Controller controller = new Controller();
 			EventTree<Date, Event> tree = new EventTree<Date, Event>();
-			controller.importSchema(tree, "Daniel");
-			controller.importSchema(tree, "Konstantin");
-			controller.importSchema(tree, "Max");
-			controller.runAlgorithm(tree, new Date(2015 - 1900, 1 - 1, 8), 
-					new Date(2015 - 1900, 1 - 1, 10), 
-					new Date(2015 - 1900, 1 - 1, 10, 9, 18), 
-					new Date(2015 - 1900, 1 - 1, 10, 15, 4));
-			
+			controller.importSchema(tree, "Daniel", "personal.ics");
+			controller.importSchema(tree, "Konstantin","personal2.ics");
+			//controller.importSchema(tree, "Max");
+			// Year(Any) Month(1-12) Day(1-31) Hour(0-23) Min(0-59) Sec MilliS
+			controller.runAlgorithm(tree, 
+					new Date(2015 - 1900, 1 - 1, 6),new Date(2015 - 1900, 1 - 1, 10), 
+					new Date(0,0,0,8,0), new Date(0,0,0,17,0));
+
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
