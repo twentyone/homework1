@@ -18,7 +18,7 @@ public class Controller {
 	
 	public void runAlgorithm(EventTree<Date, Event> tree, 
 										 Date dateStart, Date dateEnd, 
-										 Date timeStart, Date timeEnd) {
-		Algorithm.runAlgorithm(tree, dateStart, dateEnd, timeStart, timeEnd);
+										 Date timeStart, Date timeEnd,int duration) {
+		Algorithm.runAlgorithm(tree, dateStart, dateEnd, timeStart, timeEnd,duration);
 	}
 }

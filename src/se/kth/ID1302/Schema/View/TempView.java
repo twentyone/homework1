@@ -17,11 +17,12 @@ public class TempView {
 			EventTree<Date, Event> tree = new EventTree<Date, Event>();
 			controller.importSchema(tree, "Daniel", "personal.ics");
 			controller.importSchema(tree, "Konstantin","personal2.ics");
+			int duration = 60;
 			//controller.importSchema(tree, "Max");
 			// Year(Any) Month(1-12) Day(1-31) Hour(0-23) Min(0-59) Sec MilliS
 			controller.runAlgorithm(tree, 
 					new Date(2015 - 1900, 1 - 1, 6),new Date(2015 - 1900, 1 - 1, 10), 
-					new Date(0,0,0,8,0), new Date(0,0,0,17,0));
+					new Date(0,0,0,8,0), new Date(0,0,0,17,0), duration);
 
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
