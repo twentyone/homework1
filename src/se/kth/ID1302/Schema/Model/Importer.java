@@ -3,25 +3,22 @@ package se.kth.ID1302.Schema.Model;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URI;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Iterator;
-
-
 
 import net.fortuna.ical4j.data.CalendarBuilder;
 import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.Component;
 import net.fortuna.ical4j.model.Property;
-import net.fortuna.ical4j.model.parameter.Value;
+import net.fortuna.ical4j.model.TimeZone;
 
 public class Importer {
 	
-	public static void importCalendar(EventTree<Date, Event> eventTree, String owner, String nameOfFile) throws ParseException {
+	public static void importCalendar(EventTree<Date, Event> eventTree, 
+			String owner, String nameOfFile) throws ParseException {
 		FileInputStream fin;
 		CalendarBuilder builder;
 		Calendar calendar = null;
@@ -46,16 +43,15 @@ public class Importer {
 		    
 		    String start = component.getProperties().getProperty(Property.DTSTART).getValue();
 		    String end   = component.getProperties().getProperty(Property.DTEND).getValue();
-		    String uid   = component.getProperties().getProperty(Property.UID).getValue();
 		    
 		    DateFormat test = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'");
+		    test.setTimeZone(TimeZone.getTimeZone("UTC"));
 		  	Date startDate  = test.parse(start);
 		    Date endDate    = test.parse(end);
-		    
-		    //Kan tänka mig att det räcker med en enda Long här istället för 3 ints? YYYYMMDD
+
 		    Date key = new Date(startDate.getYear(), startDate.getMonth(), startDate.getDate());
 		    
-		    Event event = new Event(startDate, endDate, uid, owner);
+		    Event event = new Event(startDate, endDate, owner);
 
 		    eventTree.put(key, event);
 		    

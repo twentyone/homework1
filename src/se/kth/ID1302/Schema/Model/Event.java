@@ -3,20 +3,16 @@ package se.kth.ID1302.Schema.Model;
 import java.util.Date;
 
 public class Event {
-	private String id;
+
 	private String owner;
 	private Date start;
 	private Date end;
 	
-	public Event(Date start, Date end, String id, String owner) {
-		this.id = id;
+	public Event(Date start, Date end,String owner) {
+		
 		this.owner = owner;
 		this.start = start;
 		this.end = end;
-	}
-
-	public String getId() {
-		return id;
 	}
 
 	public Date getStart() {
@@ -32,6 +28,6 @@ public class Event {
 	}
 
 	public String toString() {
-		return "Owner: " + owner + "\nUID: " + id + "\nStart: " + start + "\nEnd: " + end;
+		return "Owner: " + owner +  "\nStart: " + start + "\nEnd: " + end;
 	}
 }
