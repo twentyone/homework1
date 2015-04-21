@@ -6,6 +6,9 @@ import java.util.Date;
 
 
 
+import java.util.List;
+
+import net.fortuna.ical4j.model.component.VEvent;
 import se.kth.ID1302.Schema.Model.EventTree;
 import se.kth.ID1302.Schema.Model.Exporter;
 import se.kth.ID1302.Schema.Model.Importer;
@@ -18,12 +21,15 @@ public class Controller {
 		Importer.importCalendar(tree, owner, nameOfFile);
 	}
 	
-	public void runAlgorithm(EventTree<Date, Event> tree, 
+	public Algorithm runAlgorithm(EventTree<Date, Event> tree, 
 										 Date dateStart, Date dateEnd, 
-										 Date timeStart, Date timeEnd,int duration) {
+										 Date timeStart, Date timeEnd, int duration, int maxUnattendance) {
 		
-		Algorithm alg = new Algorithm(tree, dateStart, dateEnd, timeStart, timeEnd);
-		Exporter export = new Exporter();
-		export.exportToIcal(alg, dateStart, dateEnd, timeStart, timeEnd, duration);
+		Algorithm alg = new Algorithm(tree, dateStart, dateEnd, timeStart, timeEnd, duration, maxUnattendance);
+		return alg;
+	}
+	
+	public void exportEvents(List<VEvent> possibleMeetings) {
+		Exporter.createCalender(possibleMeetings);
 	}
 }
