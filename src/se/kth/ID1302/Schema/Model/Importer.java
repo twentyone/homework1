@@ -18,18 +18,16 @@ import net.fortuna.ical4j.model.TimeZone;
 public class Importer {
 	
 	public static void importCalendar(EventTree<Date, Event> eventTree, 
-			String owner, String nameOfFile) throws ParseException {
+			String owner, String nameOfFile){
 		FileInputStream fin;
 		CalendarBuilder builder;
 		Calendar calendar = null;
 		
 		try {
-			//TODO: get file
 			fin = new FileInputStream(nameOfFile);
 			builder = new CalendarBuilder();
 			calendar = builder.build(fin);
 			
-		
 		} catch (ParserException e) {
 			System.err.println("Parse Exception");
 		} catch (FileNotFoundException e) {
@@ -46,8 +44,17 @@ public class Importer {
 		    
 		    DateFormat test = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'");
 		    test.setTimeZone(TimeZone.getTimeZone("UTC"));
-		  	Date startDate  = test.parse(start);
-		    Date endDate    = test.parse(end);
+		  	Date startDate = new Date();
+		  	Date endDate   = new Date();
+			try {
+				startDate  = test.parse(start);
+				endDate    = test.parse(end);
+				
+			} catch (ParseException e) {
+				e.printStackTrace();
+				System.err.println("Date parse Exception");
+			}
+		    
 
 		    Date key = new Date(startDate.getYear(), startDate.getMonth(), startDate.getDate());
 		    

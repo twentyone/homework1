@@ -16,20 +16,21 @@ import se.kth.ID1302.Schema.Model.Event;
 import se.kth.ID1302.Schema.Model.Algorithm;
 
 public class Controller {
+	EventTree<Date, Event> tree = new EventTree<Date, Event>();
 	
-	public void importSchema(EventTree<Date, Event> tree, String owner, String nameOfFile) throws ParseException {
+	public void importSchema(String owner, String nameOfFile) throws ParseException {
 		Importer.importCalendar(tree, owner, nameOfFile);
 	}
 	
-	public Algorithm runAlgorithm(EventTree<Date, Event> tree, 
-										 Date dateStart, Date dateEnd, 
-										 Date timeStart, Date timeEnd, int duration, int maxUnattendance) {
+	public Algorithm runAlgorithm(
+			Date dateStart, Date dateEnd, 
+			Date timeStart, Date timeEnd, int duration, int maxUnattendance) {
 		
 		Algorithm alg = new Algorithm(tree, dateStart, dateEnd, timeStart, timeEnd, duration, maxUnattendance);
 		return alg;
 	}
 	
-	public void exportEvents(List<VEvent> possibleMeetings) {
-		Exporter.createCalender(possibleMeetings);
+	public void exportEvents(List<VEvent> possibleMeetings, String path) {
+		Exporter.createCalender(possibleMeetings, path);
 	}
 }

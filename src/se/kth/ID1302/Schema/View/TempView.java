@@ -13,21 +13,21 @@ public class TempView {
 	public static void main(String[] args) {
 		try {
 			Controller controller = new Controller();
-			EventTree<Date, Event> tree = new EventTree<Date, Event>();
+			//EventTree<Date, Event> tree = new EventTree<Date, Event>();
 			
-			controller.importSchema(tree, "Daniel", "personal.ics");
-			controller.importSchema(tree, "Konstantin","personal2.ics");
+			controller.importSchema("Daniel", "personal.ics");
+			controller.importSchema("Konstantin","personal2.ics");
 			
 			// Year(Any) Month(1-12) Day(1-31) Hour(0-23) Min(0-59) Sec MilliS
 			
-			Algorithm result = controller.runAlgorithm(tree, 
+			Algorithm result = controller.runAlgorithm(
 					/* Start date: */ new Date(2015 - 1900, 1 - 1, 6),
 					/* Stop date:  */ new Date(2015 - 1900, 1 - 1, 10), 
 					/* Start time: */ new Date(0,0,0,8,0), 
 					/* Stop time:  */ new Date(0,0,0,17,0), 
 					/* Duration:   */ 60, 
 					/* Max borta:  */ 2);
-			controller.exportEvents(result.getPossibleMeetings());
+			controller.exportEvents(result.getPossibleMeetings(), "");
 			
 		} catch (ParseException e) { e.printStackTrace(); }
 	}

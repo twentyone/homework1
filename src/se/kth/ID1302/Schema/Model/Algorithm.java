@@ -93,11 +93,11 @@ public class Algorithm {
 		return (((start1 == null) || (end2 == null) || start1.before(end2)) && ((start2 == null)
 				|| (end1 == null) || end1.after(start2)));
 	}
-	
-	public Block[][] getBlocks(){
-		return blocks;
-	}
-	
+//	
+//	public Block[][] getBlocks(){
+//		return blocks;
+//	}
+//	
 	public List<VEvent> getPossibleMeetings() {
 		return possibleMeetings;
 	}
