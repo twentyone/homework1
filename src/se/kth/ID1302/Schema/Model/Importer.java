@@ -36,6 +36,8 @@ public class Importer {
 			System.err.println("I/O Exception");
 		}
 		
+		System.out.println("Testttiii1");
+		
 		for (Object c : calendar.getComponents()) {
 		    Component component = (Component) c;
 		    
