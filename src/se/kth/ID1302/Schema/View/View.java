@@ -283,37 +283,41 @@ public class View{
 		JButton btnNewButton_1 = new JButton("Kör");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Date startdate = new Date(dateChooser.getDate().getYear(), dateChooser.getDate().getMonth(), dateChooser.getDate().getDate());
-				Date enddate   = new Date(dateChooser_1.getDate().getYear(), dateChooser_1.getDate().getMonth(), dateChooser_1.getDate().getDate());
-				String timeStartString = timeStartField.getText();
-				int timmar  = Integer.parseInt(timeStartString.substring(0, 2));
-				int minuter = Integer.parseInt(timeStartString.substring(3, 5));
-				Date timeStart = new Date (0, 0, 0, timmar, minuter);
-				
-				String timeEndString = timeEndField.getText();
-				timmar  = Integer.parseInt(timeEndString.substring(0, 2));
-				minuter = Integer.parseInt(timeEndString.substring(3, 5));
-				Date timeEnd = new Date (0, 0, 0, timmar, minuter);
-				
-				int duration = Integer.parseInt(durationField.getText());
-				
-				int maxUnattendance = Integer.parseInt(maxUnattendanceField.getText());
-				
-				if (timeStart.after(timeEnd)) 
-					JOptionPane.showMessageDialog(frame, "Starttid är efter sluttid", "Error!" , JOptionPane.ERROR_MESSAGE);
-				else {
-				if (startdate.after(enddate))
-					JOptionPane.showMessageDialog(frame, "Startdatum är efter slutdatum", "Error!" , JOptionPane.ERROR_MESSAGE);
-				else {
-				if (!(duration > 0)) 
-					JOptionPane.showMessageDialog(frame, "Felaktig längd", "Error!" , JOptionPane.ERROR_MESSAGE);
-				else {
-				if (maxUnattendance < 0) 
-					JOptionPane.showMessageDialog(frame, "Negativ max frånvarande", "Error!" , JOptionPane.ERROR_MESSAGE);
-				else {
-					alg = controller.runAlgorithm(startdate, enddate, timeStart, timeEnd, duration, maxUnattendance);
-					redrawCalendar();					
-				}}}}
+				try {
+					Date startdate = new Date(dateChooser.getDate().getYear(), dateChooser.getDate().getMonth(), dateChooser.getDate().getDate());
+					Date enddate   = new Date(dateChooser_1.getDate().getYear(), dateChooser_1.getDate().getMonth(), dateChooser_1.getDate().getDate());
+					String timeStartString = timeStartField.getText();
+					int timmar  = Integer.parseInt(timeStartString.substring(0, 2));
+					int minuter = Integer.parseInt(timeStartString.substring(3, 5));
+					Date timeStart = new Date (0, 0, 0, timmar, minuter);
+					
+					String timeEndString = timeEndField.getText();
+					timmar  = Integer.parseInt(timeEndString.substring(0, 2));
+					minuter = Integer.parseInt(timeEndString.substring(3, 5));
+					Date timeEnd = new Date (0, 0, 0, timmar, minuter);
+					
+					int duration = Integer.parseInt(durationField.getText());
+					
+					int maxUnattendance = Integer.parseInt(maxUnattendanceField.getText());
+					
+					if (timeStart.after(timeEnd)) 
+						JOptionPane.showMessageDialog(frame, "Starttid är efter sluttid", "Error!" , JOptionPane.ERROR_MESSAGE);
+					else {
+					if (startdate.after(enddate))
+						JOptionPane.showMessageDialog(frame, "Startdatum är efter slutdatum", "Error!" , JOptionPane.ERROR_MESSAGE);
+					else {
+					if (!(duration > 0)) 
+						JOptionPane.showMessageDialog(frame, "Felaktig längd", "Error!" , JOptionPane.ERROR_MESSAGE);
+					else {
+					if (maxUnattendance < 0) 
+						JOptionPane.showMessageDialog(frame, "Negativ max frånvarande", "Error!" , JOptionPane.ERROR_MESSAGE);
+					else {
+						alg = controller.runAlgorithm(startdate, enddate, timeStart, timeEnd, duration, maxUnattendance);
+						redrawCalendar();					
+					}}}}
+				} catch (NullPointerException excpt) {
+					JOptionPane.showMessageDialog(frame, "Du måste ange alla parametrar först!", "Hoppsan!" , JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		springLayout.putConstraint(SpringLayout.NORTH, btnNewButton_1, 0, SpringLayout.NORTH, btnImport);
