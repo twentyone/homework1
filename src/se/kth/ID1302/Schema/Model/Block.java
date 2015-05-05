@@ -49,11 +49,13 @@ public class Block {
 	
 	public String toString() {
 		if (this.priority > 0) {
-			StringBuilder sb = new StringBuilder("Prio: " + priority + " - People: " );
-			for (String s : peopleNotPresent) {
-				sb.append(s + ", ");
+			StringBuilder sb = new StringBuilder("Frånvarande: ");
+			for (String string : peopleNotPresent) {
+				sb.append((String) string);
+				sb.append(" ");
 			}
-			
+			sb.append("Prioritet: " + priority);
+			System.out.println(sb);
 			return sb.toString();
 		} else
 			return "";

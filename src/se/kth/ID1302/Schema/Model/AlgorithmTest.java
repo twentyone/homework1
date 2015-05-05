@@ -37,7 +37,7 @@ public class AlgorithmTest {
 
 		Algorithm alg  = new Algorithm(tree, dateStart, dateEnd, timeStart, timeEnd, duration, maxUnattendance);
 		
-		List<VEvent> actual  = alg.getPossibleMeetings();
+		EventTree<Date, VEvent> actual  = alg.getPossibleMeetings();
 		List<VEvent> expected = new ArrayList<VEvent>();
 
 		DateTime start = new DateTime(new Date(0,0,0,8,0));

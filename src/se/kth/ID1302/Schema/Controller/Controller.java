@@ -20,7 +20,6 @@ public class Controller {
 	
 	public void importSchema(String owner, String nameOfFile) throws ParseException {
 		Importer.importCalendar(tree, owner, nameOfFile);
-		System.out.println(tree.size());
 	}
 	
 	public Algorithm runAlgorithm(
@@ -31,7 +30,7 @@ public class Controller {
 		return alg;
 	}
 	
-	public void exportEvents(List<VEvent> possibleMeetings, String path) {
-		Exporter.createCalender(possibleMeetings, path);
+	public void exportEvents(VEvent event, String path) {
+		Exporter.createCalender(event, path);
 	}
 }

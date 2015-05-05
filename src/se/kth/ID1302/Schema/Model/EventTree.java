@@ -161,6 +161,36 @@ public class EventTree<Key extends Comparable<Key>, Value> {
         return queue;
     }
     
+    // all of the keys, as an Iterable
+    public Iterable<Key> keys() {
+        return keys(min(), max());
+    }
+ // the smallest key; null if no such key
+    public Key min() {
+        if (isEmpty()) return null;
+        return min(root).key;
+    } 
+
+    // the smallest key in subtree rooted at x; null if no such key
+    private Node min(Node x) { 
+        // assert x != null;
+        if (x.left == null) return x; 
+        else                return min(x.left); 
+    } 
+
+    // the largest key; null if no such key
+    public Key max() {
+        if (isEmpty()) return null;
+        return max(root).key;
+    } 
+
+    // the largest key in the subtree rooted at x; null if no such key
+    private Node max(Node x) { 
+        // assert x != null;
+        if (x.right == null) return x; 
+        else                 return max(x.right); 
+    } 
+    
     // add the keys between lo and hi in the subtree rooted at x
     // to the queue
     private void keys(Node x, ArrayList<Key> queue, Key lo, Key hi) { 

@@ -25,7 +25,7 @@ public class ExporterTest {
 
 	@Test
 	public void testCreateCalender() {
-		List<VEvent> possibleMeetings = new ArrayList<VEvent>();
+		EventTree<Date, VEvent> possibleMeetings = new EventTree<Date, VEvent>();
 		
 		Exporter.createCalender(possibleMeetings, "exportedEvent.ics");
 		
@@ -41,7 +41,7 @@ public class ExporterTest {
 		DateTime end   = new DateTime(new Date(0,0,0,8,30));
 		start.setUtc(true);
 		end.setUtc(true);
-		possibleMeetings.add(new VEvent(start, end, ""));
+		possibleMeetings.put(start, new VEvent(start, end, ""));
 		
 		Exporter.createCalender(possibleMeetings, "exportedEvent.ics");
 		Importer.importCalendar(eventTree, "", "exportedEvent.ics");

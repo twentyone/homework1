@@ -14,7 +14,8 @@ public class Algorithm {
 	static final long DAY = 86_400_000;
 
 	private Block[][] blocks;
-	List<VEvent> possibleMeetings = new ArrayList<VEvent>();
+	EventTree<Date, VEvent> possibleMeetings = new EventTree<Date, VEvent>();
+	//List<VEvent> possibleMeetings = new ArrayList<VEvent>();
 
 	public Algorithm(EventTree<Date, Event> tree, Date dateStart, Date dateEnd,
 			Date timeStart, Date timeEnd, int duration, int maxUnattendance) {
@@ -55,33 +56,37 @@ public class Algorithm {
 			dayNumber++;
 		}
 
-		for (int i = 0; i < blocks.length; i++) {
-			for (int j = 0; j < blocks[i].length; j++) {
+		for (int i = 0; i < blocks.length; i++) { // För varje dag
+			for (int j = 0; j < blocks[i].length; j++) { // För varje kvart 
 				int J = j;
-				
 				Block event2 = new Block();
-				while (J < blocks[i].length) {
+				while (J <= blocks[i].length) {
 					if ((J-j) == duration) {
-						Date date = new Date(dateStart.getTime() + DAY * i);
-						date.setHours(timeStart.getHours());
-						date.setMinutes(timeStart.getMinutes());
-						date.setTime(date.getTime() + QUARTER * j);
+						// Bas dag och tid
+						Date baseDate = new Date(dateStart.getTime() + DAY * i);
+						baseDate.setHours(timeStart.getHours());
+						baseDate.setMinutes(timeStart.getMinutes());
 						
-						Date date2 = new Date(date.getTime() + QUARTER * duration);
-						DateTime test1 = new DateTime(date);
+						// Tid för aktuell block
+						baseDate.setTime(baseDate.getTime() + QUARTER * j);
+						
+						Date date2 = new Date(baseDate.getTime() + QUARTER * duration);
+						DateTime test1 = new DateTime(baseDate);
 						DateTime test2 = new DateTime(date2);
 						
 						test1.setUtc(true);
 						test2.setUtc(true);
 						
 						VEvent event = new VEvent(test1, test2, event2.toString());
-						possibleMeetings.add(event);
+						possibleMeetings.put(new Date(test1.getYear(), test1.getMonth(), test1.getDate(),0,0,0), event);
 						break;
 					}
-					event2.addToPriority(blocks[i][J].getPriority());
-					event2.addToPeopleNotPresent(blocks[i][J].getPeopleNotPresent());
-					if (event2.getNumberOfNotPresetPersons() > maxUnattendance)
-						break;
+					if(J < blocks[i].length) {
+						event2.addToPriority(blocks[i][J].getPriority());
+						event2.addToPeopleNotPresent(blocks[i][J].getPeopleNotPresent());
+						if (event2.getNumberOfNotPresetPersons() > maxUnattendance) 
+							break;
+					}
 					J++;
 				}
 			}
@@ -98,7 +103,7 @@ public class Algorithm {
 //		return blocks;
 //	}
 //	
-	public List<VEvent> getPossibleMeetings() {
+	public EventTree<Date, VEvent> getPossibleMeetings() {
 		return possibleMeetings;
 	}
 }

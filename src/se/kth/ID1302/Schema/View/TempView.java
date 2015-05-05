@@ -2,7 +2,9 @@ package se.kth.ID1302.Schema.View;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
+import net.fortuna.ical4j.model.component.VEvent;
 import se.kth.ID1302.Schema.Controller.Controller;
 import se.kth.ID1302.Schema.Model.Algorithm;
 import se.kth.ID1302.Schema.Model.Event;
@@ -27,7 +29,13 @@ public class TempView {
 					/* Stop time:  */ new Date(0,0,0,17,0), 
 					/* Duration:   */ 60, 
 					/* Max borta:  */ 2);
-			controller.exportEvents(result.getPossibleMeetings(), "");
+			for (Date date : result.getPossibleMeetings().keys()) {
+				System.out.println(date);
+				for (VEvent ve : result.getPossibleMeetings().get(date)) {
+					System.out.println(ve);
+				}
+			}
+			//controller.exportEvents(result.getPossibleMeetings(), "");
 			
 		} catch (ParseException e) { e.printStackTrace(); }
 	}
